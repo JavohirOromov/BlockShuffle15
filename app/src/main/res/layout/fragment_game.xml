@@ -25,7 +25,8 @@
         android:background="@drawable/score_button"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/liner"
+        app:layout_constraintBottom_toTopOf="@id/container"
+        app:layout_constraintVertical_bias="0.25"
         android:text="12"
         android:textSize="24sp"
         android:paddingBottom="4dp"
@@ -57,39 +58,40 @@
         android:paddingBottom="4dp"
         android:textColor="@color/white"
         android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@id/liner"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0." />
+        app:layout_constraintBottom_toTopOf="@id/container"
+        app:layout_constraintVertical_bias="0.25"
+        />
 
     <LinearLayout
         android:id="@+id/liner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/time"
-        app:layout_constraintBottom_toTopOf="@id/container"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.2"
         android:layout_marginHorizontal="12dp"
         >
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="0dp"
-            android:layout_height="70dp"
-            android:layout_weight="1"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/time"
             />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/swallow"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="28dp"
             android:layout_weight="4"
             android:background="@drawable/time0"
             android:layout_marginHorizontal="4dp"
             />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="0dp"
-            android:layout_height="70dp"
-            android:layout_weight="1"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+
             android:background="@drawable/time"
             />
     </LinearLayout>
@@ -102,10 +104,10 @@
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/liner"
+        app:layout_constraintVertical_bias="0.7"
         android:layout_marginBottom="80dp"
         >
 
@@ -179,6 +181,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/container"
         android:background="@drawable/restart_btn"
+        app:layout_constraintVertical_bias="0.2"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
