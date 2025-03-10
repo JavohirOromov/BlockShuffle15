@@ -10,7 +10,7 @@ class LocalStorage private constructor(context: Context){
         private lateinit var storage: LocalStorage
         private const val FILE_NAME = "Javohir's Puzzle"
         private const val SCORE = "score"
-
+        
         fun init(context: Context){
             if (!(::storage.isInitialized)){
                 storage = LocalStorage(context)

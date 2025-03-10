@@ -79,14 +79,14 @@
             android:layout_height="60dp"
             android:background="@drawable/time"
             />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/swallow"
             android:layout_width="0dp"
-            android:layout_height="28dp"
-            android:layout_weight="4"
-            android:background="@drawable/time0"
+            android:layout_height="17dp"
             android:layout_marginHorizontal="4dp"
-            />
+            android:layout_weight="4"
+            android:background="@drawable/time0" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="60dp"
