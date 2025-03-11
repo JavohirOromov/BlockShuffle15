@@ -1,8 +1,11 @@
 package com.example.blockshuffle15.screens
 
+import android.annotation.SuppressLint
+import android.icu.util.Calendar
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.SystemClock
+import android.util.Log
 import android.view.View
 import android.widget.Chronometer
 import android.widget.LinearLayout
@@ -11,7 +14,10 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import com.example.blockshuffle15.R
 import com.example.blockshuffle15.databinding.FragmentGameBinding
+import com.example.blockshuffle15.storage.LocalStorage
 import dev.androidbroadcast.vbpd.viewBinding
+import java.text.SimpleDateFormat
+import java.util.Locale
 import kotlin.math.abs
 
 class GameFragment : Fragment(R.layout.fragment_game) {
@@ -22,17 +28,21 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     private var emptyY = 0
     private var score = 0
     private var chronometer: Chronometer? = null
+    private var storage: LocalStorage? = null
+    private val calendar = Calendar.getInstance()
+    private val dateFormat = SimpleDateFormat("dd - MM", Locale.getDefault())
+    private val currentDate = dateFormat.format(calendar.time)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadViews()
         setShuffleDate()
         clickEvent()
     }
-
     private fun loadViews() {
         binding.score.text = "0"
         binding.swallow.setBackgroundResource(R.drawable.time1)
         chronometer = Chronometer(requireContext())
+        storage = LocalStorage.getInstance()
         binding.time.base = SystemClock.elapsedRealtime()
         binding.time.start()
         buttons = Array(4) { Array(4) { AppCompatButton(requireContext()) } }
@@ -44,31 +54,30 @@ class GameFragment : Fragment(R.layout.fragment_game) {
             }
         }
     }
-
     private fun setShuffleDate() {
         list = ArrayList()
-        for (i in 0 until 16){
-            list.add(i)
-        }
-//        list.add(1)
-//        list.add(2)
-//        list.add(3)
-//        list.add(4)
-//        list.add(5)
-//        list.add(6)
-//        list.add(7)
-//        list.add(8)
-//        list.add(9)
-//        list.add(10)
-//        list.add(11)
-//        list.add(12)
-//        list.add(13)
-//        list.add(14)
-//        list.add(0)
-//        list.add(15)
-        while (isSolvable()) {
-            list.shuffle()
-        }
+//        for (i in 0 until 16){
+//            list.add(i)
+//        }
+        list.add(1)
+        list.add(2)
+        list.add(3)
+        list.add(4)
+        list.add(5)
+        list.add(6)
+        list.add(7)
+        list.add(8)
+        list.add(9)
+        list.add(10)
+        list.add(11)
+        list.add(12)
+        list.add(13)
+        list.add(14)
+        list.add(0)
+        list.add(15)
+//        do {
+//            list.shuffle()
+//        }while (!isSolvable())
         for (i in buttons.indices) {
             for (j in buttons[i].indices) {
                 if (list[i * 4 + j] == 0) {
@@ -119,11 +128,43 @@ class GameFragment : Fragment(R.layout.fragment_game) {
             if (x == 3 && y == 3) {
                 if (gameOver()) {
                     Toast.makeText(requireContext(), "Yutingiz", Toast.LENGTH_SHORT).show()
+                    saveRecord()
                 }
             }
         }
     }
+    @SuppressLint("DefaultLocale")
+    private fun saveRecord(){
+        Log.d("TTT","ishlayapti")
+        if ((score < (storage?.getRecord1() ?: 0)) || storage?.getRecord1() == 0){ // score = 30, getRecord1 = 10
+            storage?.saveRecord1(score)
+            val elapsedTime = SystemClock.elapsedRealtime() - binding.time.base
+            val minutes = (elapsedTime / 1000) / 60
+            val seconds = (elapsedTime / 1000) % 60
+            val formattedTime = String.format("%02d:%02d", minutes, seconds)
+            storage?.saveTime1(formattedTime)
+            storage?.saveDate1(currentDate)
+        }
+       else if ((score < (storage?.getRecord2() ?: 0)) || storage?.getRecord2() == 0){ // score = 30, getRecord2 = 15
+            storage?.saveRecord2(score)
+            val elapsedTime = SystemClock.elapsedRealtime() - binding.time.base
+            val minutes = (elapsedTime / 1000) / 60
+            val seconds = (elapsedTime / 1000) % 60
+            val formattedTime = String.format("%02d:%02d", minutes, seconds)
+            storage?.saveTime2(formattedTime)
+            storage?.saveDate2(currentDate)
 
+        }
+        else if((score < (storage?.getRecord3()?: 0)) || storage?.getRecord3() == 0){   // score = 30, getRecord = 40
+            storage?.saveRecord3(score)
+            val elapsedTime = SystemClock.elapsedRealtime() - binding.time.base
+            val minutes = (elapsedTime / 1000) / 60
+            val seconds = (elapsedTime / 1000) % 60
+            val formattedTime = String.format("%02d:%02d", minutes, seconds)
+            storage?.saveTime3(formattedTime)
+            storage?.saveDate3(currentDate)
+        }
+    }
     private fun setScore() {
         score++
         binding.score.text = score.toString()
@@ -149,7 +190,6 @@ class GameFragment : Fragment(R.layout.fragment_game) {
 
     private fun isSolvable(): Boolean {
         val flatNumbers = mutableListOf<Int>()
-
         for (num in list) {
             if (num != 0) {
                 flatNumbers.add(num)
@@ -207,5 +247,4 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         return true
     }
 }
-
 data class MyCoordinate(val x: Int, val y: Int)

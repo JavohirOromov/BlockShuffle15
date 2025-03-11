@@ -17,5 +17,8 @@ class MenuFragment: Fragment(R.layout.fragment_menu) {
         binding.newGameBtn.setOnClickListener {
             replaceFragment(GameFragment())
         }
+        binding.recordBtn.setOnClickListener {
+            replaceFragment(RecordFragment())
+        }
     }
 }
