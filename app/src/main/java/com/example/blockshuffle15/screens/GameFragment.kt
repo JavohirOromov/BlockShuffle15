@@ -1,5 +1,4 @@
 package com.example.blockshuffle15.screens
-
 import android.annotation.SuppressLint
 import android.icu.util.Calendar
 import android.media.MediaPlayer
@@ -14,12 +13,12 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import com.example.blockshuffle15.R
 import com.example.blockshuffle15.databinding.FragmentGameBinding
+import com.example.blockshuffle15.dialogs.SettingsDialog
 import com.example.blockshuffle15.storage.LocalStorage
 import dev.androidbroadcast.vbpd.viewBinding
 import java.text.SimpleDateFormat
 import java.util.Locale
 import kotlin.math.abs
-
 class GameFragment : Fragment(R.layout.fragment_game) {
     private val binding: FragmentGameBinding by viewBinding(FragmentGameBinding::bind)
     private lateinit var list: ArrayList<Int>
@@ -32,6 +31,14 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     private val calendar = Calendar.getInstance()
     private val dateFormat = SimpleDateFormat("dd - MM", Locale.getDefault())
     private val currentDate = dateFormat.format(calendar.time)
+    private var settingsDialog: SettingsDialog? = null
+    private var checkClick: Boolean = true
+    private val music: MediaPlayer by lazy {
+        MediaPlayer.create(requireContext(),R.raw.music1)
+    }
+    private val sound: MediaPlayer by lazy {
+        MediaPlayer.create(requireContext(),R.raw.click1)
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadViews()
@@ -43,7 +50,9 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         binding.swallow.setBackgroundResource(R.drawable.time1)
         chronometer = Chronometer(requireContext())
         storage = LocalStorage.getInstance()
+        settingsDialog = SettingsDialog(requireContext())
         binding.time.base = SystemClock.elapsedRealtime()
+        music.start()
         binding.time.start()
         buttons = Array(4) { Array(4) { AppCompatButton(requireContext()) } }
         val layout = binding.container
@@ -56,28 +65,28 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     }
     private fun setShuffleDate() {
         list = ArrayList()
-//        for (i in 0 until 16){
-//            list.add(i)
-//        }
-        list.add(1)
-        list.add(2)
-        list.add(3)
-        list.add(4)
-        list.add(5)
-        list.add(6)
-        list.add(7)
-        list.add(8)
-        list.add(9)
-        list.add(10)
-        list.add(11)
-        list.add(12)
-        list.add(13)
-        list.add(14)
-        list.add(0)
-        list.add(15)
-//        do {
-//            list.shuffle()
-//        }while (!isSolvable())
+        for (i in 0 until 16){
+            list.add(i)
+        }
+//        list.add(1)
+//        list.add(2)
+//        list.add(3)
+//        list.add(4)
+//        list.add(5)
+//        list.add(6)
+//        list.add(7)
+//        list.add(8)
+//        list.add(9)
+//        list.add(10)
+//        list.add(11)
+//        list.add(12)
+//        list.add(13)
+//        list.add(14)
+//        list.add(0)
+//        list.add(15)
+        do {
+            list.shuffle()
+        }while (!isSolvable())
         for (i in buttons.indices) {
             for (j in buttons[i].indices) {
                 if (list[i * 4 + j] == 0) {
@@ -108,6 +117,26 @@ class GameFragment : Fragment(R.layout.fragment_game) {
             score = 0
             setShuffleDate()
         }
+        binding.menu.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
+        binding.settings.setOnClickListener {
+            settingsDialog?.show()
+        }
+        settingsDialog?.setPlayClickListener { musicCheck, soundCheck ->
+            if (musicCheck){
+                music.start()
+            }else{
+                music.pause()
+            }
+            if (soundCheck){
+               sound.start()
+                checkClick = true
+            }else{
+                sound.pause()
+                checkClick = false
+            }
+        }
     }
 
     private fun checkCanMove(x: Int, y: Int) {
@@ -121,7 +150,15 @@ class GameFragment : Fragment(R.layout.fragment_game) {
                 visibility = View.INVISIBLE
             }
             setScore()
-            clickMusic()
+            if (sound.isPlaying){
+                sound.seekTo(0)
+            }else{
+                if (checkClick){
+                    sound.start()
+                }else{
+                    sound.pause()
+                }
+            }
             checkSwallow()
             emptyX = x
             emptyY = y
@@ -133,7 +170,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
             }
         }
     }
-    @SuppressLint("DefaultLocale")
+   @SuppressLint("DefaultLocale")
     private fun saveRecord(){
         Log.d("TTT","ishlayapti")
         if ((score < (storage?.getRecord1() ?: 0)) || storage?.getRecord1() == 0){ // score = 30, getRecord1 = 10
@@ -169,13 +206,6 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         score++
         binding.score.text = score.toString()
     }
-
-    private fun clickMusic() {
-        val media = MediaPlayer.create(requireContext(), R.raw.click1)
-        media.start()
-
-    }
-
     private fun gameOver(): Boolean {
         for (i in 0 until 4) {
             for (j in 0 until 4) {
@@ -245,6 +275,21 @@ class GameFragment : Fragment(R.layout.fragment_game) {
             }
         }
         return true
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        settingsDialog = null
+    }
+
+    override fun onPause() {
+        super.onPause()
+        music.pause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        music.start()
     }
 }
 data class MyCoordinate(val x: Int, val y: Int)
