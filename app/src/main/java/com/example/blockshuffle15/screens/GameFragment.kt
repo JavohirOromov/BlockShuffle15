@@ -13,6 +13,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import com.example.blockshuffle15.R
 import com.example.blockshuffle15.databinding.FragmentGameBinding
+import com.example.blockshuffle15.dialogs.RestartDialog
 import com.example.blockshuffle15.dialogs.SettingsDialog
 import com.example.blockshuffle15.storage.LocalStorage
 import dev.androidbroadcast.vbpd.viewBinding
@@ -32,6 +33,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     private val dateFormat = SimpleDateFormat("dd - MM", Locale.getDefault())
     private val currentDate = dateFormat.format(calendar.time)
     private var settingsDialog: SettingsDialog? = null
+    private var restartDialog: RestartDialog? = null
     private var checkClick: Boolean = true
     private val music: MediaPlayer by lazy {
         MediaPlayer.create(requireContext(),R.raw.music1)
@@ -39,6 +41,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     private val sound: MediaPlayer by lazy {
         MediaPlayer.create(requireContext(),R.raw.click1)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadViews()
@@ -51,6 +54,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         chronometer = Chronometer(requireContext())
         storage = LocalStorage.getInstance()
         settingsDialog = SettingsDialog(requireContext())
+        restartDialog = RestartDialog(requireContext())
         binding.time.base = SystemClock.elapsedRealtime()
         binding.time.start()
         music.start()
@@ -113,12 +117,16 @@ class GameFragment : Fragment(R.layout.fragment_game) {
             }
         }
         binding.restart.setOnClickListener {
+            restartDialog?.show()
+        }
+        restartDialog?.setYesClickListener {
             binding.score.text = "0"
             binding.swallow.setBackgroundResource(R.drawable.time1)
             binding.time.base = SystemClock.elapsedRealtime()
             binding.time.start()
             score = 0
             setShuffleDate()
+            restartDialog?.dismiss()
         }
         binding.menu.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
