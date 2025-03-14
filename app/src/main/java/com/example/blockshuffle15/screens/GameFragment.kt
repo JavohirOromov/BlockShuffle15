@@ -303,6 +303,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     override fun onResume() {
         super.onResume()
         music.start()
+        
     }
 }
 data class MyCoordinate(val x: Int, val y: Int)

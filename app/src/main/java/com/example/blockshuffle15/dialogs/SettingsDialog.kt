@@ -18,6 +18,7 @@ class SettingsDialog(context: Context): AlertDialog(context) {
     init {
         setView(binding.root)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        window?.attributes?.windowAnimations = R.style.CustomDialogAnim
         initialSoundState = binding.switchSound.isChecked
         initialMusicState = binding.switchMusic.isChecked
 

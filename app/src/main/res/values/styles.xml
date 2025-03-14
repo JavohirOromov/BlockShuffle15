@@ -17,4 +17,9 @@
         <item name="android:textSize">10sp</item>
         <item name="fontFamily">@font/font1</item>
     </style>
+
+    <style name="CustomDialogAnim">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_exit</item>
+    </style>
 </resources>

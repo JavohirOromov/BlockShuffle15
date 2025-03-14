@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
+import com.example.blockshuffle15.R
 import com.example.blockshuffle15.databinding.DialogRestartBinding
 
 class RestartDialog(context: Context): AlertDialog(context) {
@@ -19,7 +20,7 @@ class RestartDialog(context: Context): AlertDialog(context) {
     init {
         setView(binding.root)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
+        window?.attributes?.windowAnimations = R.style.CustomDialogAnim
         binding.no.setOnClickListener {
             dismiss()
         }
