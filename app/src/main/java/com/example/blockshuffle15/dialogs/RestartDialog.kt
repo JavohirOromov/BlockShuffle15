@@ -1,5 +1,4 @@
 package com.example.blockshuffle15.dialogs
-
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable

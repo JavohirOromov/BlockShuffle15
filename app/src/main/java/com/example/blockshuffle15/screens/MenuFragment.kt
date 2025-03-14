@@ -20,5 +20,8 @@ class MenuFragment: Fragment(R.layout.fragment_menu) {
         binding.recordBtn.setOnClickListener {
             replaceFragment(RecordFragment())
         }
+        binding.InfoBtn.setOnClickListener {
+            replaceFragment(InfoFragment())
+        }
     }
 }

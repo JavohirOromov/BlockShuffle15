@@ -62,4 +62,5 @@ class SettingsDialog(context: Context): AlertDialog(context) {
     private fun currentMusicState(): Boolean {
         return binding.switchMusic.isChecked
     }
+
 }
