@@ -46,7 +46,7 @@
         android:layout_width="180dp"
         android:layout_height="60dp"
         android:background="@drawable/button_s"
-        android:text="Settings"
+        android:text="Info"
         android:textColor="@color/white"
         android:fontFamily="@font/font1"
         android:gravity="center"

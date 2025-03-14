@@ -52,8 +52,8 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         storage = LocalStorage.getInstance()
         settingsDialog = SettingsDialog(requireContext())
         binding.time.base = SystemClock.elapsedRealtime()
-        music.start()
         binding.time.start()
+        music.start()
         buttons = Array(4) { Array(4) { AppCompatButton(requireContext()) } }
         val layout = binding.container
         for (i in 0 until layout.childCount) {
@@ -113,7 +113,10 @@ class GameFragment : Fragment(R.layout.fragment_game) {
             }
         }
         binding.restart.setOnClickListener {
-            loadViews()
+            binding.score.text = "0"
+            binding.swallow.setBackgroundResource(R.drawable.time1)
+            binding.time.base = SystemClock.elapsedRealtime()
+            binding.time.start()
             score = 0
             setShuffleDate()
         }
@@ -155,8 +158,10 @@ class GameFragment : Fragment(R.layout.fragment_game) {
             }else{
                 if (checkClick){
                     sound.start()
+                    checkClick = true
                 }else{
                     sound.pause()
+                    checkClick = false
                 }
             }
             checkSwallow()
