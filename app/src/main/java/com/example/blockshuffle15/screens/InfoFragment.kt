@@ -1,5 +1,4 @@
 package com.example.blockshuffle15.screens
-
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -32,7 +31,6 @@ class InfoFragment: Fragment(R.layout.fragment_info) {
                 startActivity(Intent(Intent.ACTION_VIEW, linkedInWebUri)) // Brauzerda ochiladi
             }
         }
-
         binding.telegramText.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/Javohir_Oromov"))
              startActivity(intent)

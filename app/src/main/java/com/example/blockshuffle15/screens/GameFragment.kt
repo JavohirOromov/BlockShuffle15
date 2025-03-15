@@ -5,6 +5,7 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.SystemClock
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Chronometer
 import android.widget.LinearLayout
@@ -303,7 +304,6 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     override fun onResume() {
         super.onResume()
         music.start()
-        
     }
 }
 data class MyCoordinate(val x: Int, val y: Int)
