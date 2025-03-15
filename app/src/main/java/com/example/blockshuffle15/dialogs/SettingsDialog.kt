@@ -6,6 +6,11 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import com.example.blockshuffle15.R
 import com.example.blockshuffle15.databinding.DialogSettingsBinding
+/**
+ * Creator: Javohir Oromov
+ * project: Block Shuffle 15
+ * Javohir's MacBook Air
+ */
 class SettingsDialog(context: Context): AlertDialog(context) {
     private val binding: DialogSettingsBinding = DialogSettingsBinding.inflate(LayoutInflater.from(context))
     private var playClickListener: ((Boolean,Boolean) -> Unit)? = null

@@ -1,17 +1,17 @@
-package com.example.blockshuffle15.screens
+package com.example.blockshuffle15.screens.game
 import android.annotation.SuppressLint
 import android.icu.util.Calendar
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.SystemClock
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.Chronometer
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.blockshuffle15.R
 import com.example.blockshuffle15.databinding.FragmentGameBinding
 import com.example.blockshuffle15.dialogs.RestartDialog
@@ -21,6 +21,11 @@ import dev.androidbroadcast.vbpd.viewBinding
 import java.text.SimpleDateFormat
 import java.util.Locale
 import kotlin.math.abs
+/**
+ * Creator: Javohir Oromov
+ * project: Block shuffle 15
+ * Javohir's MacBook Air
+ */
 class GameFragment : Fragment(R.layout.fragment_game) {
     private val binding: FragmentGameBinding by viewBinding(FragmentGameBinding::bind)
     private lateinit var list: ArrayList<Int>
@@ -42,12 +47,20 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     private val sound: MediaPlayer by lazy {
         MediaPlayer.create(requireContext(),R.raw.click1)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadViews()
-        setShuffleDate()
-        clickEvent()
+        val isContinue = arguments?.getInt("continue",-1)?: -1
+        val isNewGame = arguments?.getInt("newGame",-1)?: -1
+        if (isContinue == 0){
+            loadViews()
+            setShuffleDate()
+            clickEvent()
+            setViewGetStorage()
+        }else if (isNewGame == 1){
+            loadViews()
+            setShuffleDate()
+            clickEvent()
+        }
     }
     private fun loadViews() {
         binding.score.text = "0"
@@ -73,22 +86,6 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         for (i in 0 until 16){
             list.add(i)
         }
-//        list.add(1)
-//        list.add(2)
-//        list.add(3)
-//        list.add(4)
-//        list.add(5)
-//        list.add(6)
-//        list.add(7)
-//        list.add(8)
-//        list.add(9)
-//        list.add(10)
-//        list.add(11)
-//        list.add(12)
-//        list.add(13)
-//        list.add(14)
-//        list.add(0)
-//        list.add(15)
         do {
             list.shuffle()
         }while (!isSolvable())
@@ -96,6 +93,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
             for (j in buttons[i].indices) {
                 if (list[i * 4 + j] == 0) {
                     buttons[i][j].visibility = View.INVISIBLE
+                    buttons[i][j].text = "0"
                     emptyX = i
                     emptyY = j
                 } else {
@@ -299,11 +297,49 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     override fun onPause() {
         super.onPause()
         music.pause()
+        val stringBuilder = StringBuilder()
+        val elapsedTime = SystemClock.elapsedRealtime() - binding.time.base
+        for (i in buttons.indices){
+            for (j in buttons.indices){
+                stringBuilder.append(buttons[i][j].text).append('#')
+            }
+        }
+        storage?.saveButton(stringBuilder.toString())
+        storage?.saveScore(score)
+        storage?.saveTime(elapsedTime)
     }
 
     override fun onResume() {
         super.onResume()
         music.start()
+    }
+    private fun setViewGetStorage(){
+        val savedData = storage?.getButton()?.split("#")?.filter { it.isNotEmpty() } ?: listOf()
+        val savedTime = storage?.getTime()?: 0L
+        if (savedData.size == 16) {
+            list.clear()
+            list.addAll(savedData.map { it.toInt() }) // To'g'ri list qayta tiklanadi
+                    for (i in buttons.indices) {
+                        for (j in buttons[i].indices) {
+                            if (list[i * 4 + j] == 0) {
+                                buttons[i][j].visibility = View.INVISIBLE
+                                buttons[i][j].text = "0"
+                                emptyX = i
+                                emptyY = j
+                            } else {
+                                buttons[i][j].text = list[i * 4 + j].toString()
+                                buttons[i][j].visibility = View.VISIBLE
+                            }
+                }
+            }
+        } else {
+            Log.e("GameFragment", "Saqlangan ma’lumot buzilgan! O'yin qayta yuklanmoqda.")
+            setShuffleDate()
+        }
+        score = storage?.getScore() ?: 0
+        binding.score.text = score.toString()
+        binding.time.base = SystemClock.elapsedRealtime() - savedTime
+        binding.time.start()
     }
 }
 data class MyCoordinate(val x: Int, val y: Int)

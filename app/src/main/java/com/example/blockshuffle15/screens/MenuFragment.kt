@@ -1,14 +1,18 @@
 package com.example.blockshuffle15.screens
-
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.blockshuffle15.R
 import com.example.blockshuffle15.databinding.FragmentMenuBinding
 import com.example.blockshuffle15.dialogs.QuitDialog
+import com.example.blockshuffle15.screens.game.GameFragment
 import com.example.blockshuffle15.utils.replaceFragment
 import dev.androidbroadcast.vbpd.viewBinding
-
+/**
+ * Creator: Javohir Oromov
+ * project: Block Shuffle 15
+ * Javohir's MacBook Air
+ */
 class MenuFragment: Fragment(R.layout.fragment_menu) {
     private val binding: FragmentMenuBinding by viewBinding(FragmentMenuBinding::bind)
     private var quitDialog: QuitDialog? = null
@@ -18,7 +22,13 @@ class MenuFragment: Fragment(R.layout.fragment_menu) {
         quitDialog = QuitDialog(requireContext())
 
         binding.newGameBtn.setOnClickListener {
-            replaceFragment(GameFragment())
+            val bundle = Bundle().apply {
+                putInt("newGame",1)
+            }
+            val fragment = GameFragment().apply {
+                arguments = bundle
+            }
+            replaceFragment(fragment)
         }
         binding.recordBtn.setOnClickListener {
             replaceFragment(RecordFragment())
@@ -28,6 +38,15 @@ class MenuFragment: Fragment(R.layout.fragment_menu) {
         }
         binding.quitBtn.setOnClickListener {
             quitDialog?.show()
+        }
+        binding.continueBtn.setOnClickListener {
+            val bundle = Bundle().apply {
+                putInt("continue",0)
+            }
+            val fragment = GameFragment().apply {
+                arguments = bundle
+            }
+            replaceFragment(fragment)
         }
         quitDialog?.setYesClickListener {
             requireActivity().finish()

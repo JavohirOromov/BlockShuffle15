@@ -6,7 +6,11 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import com.example.blockshuffle15.R
 import com.example.blockshuffle15.databinding.DialogRestartBinding
-
+/**
+ * Creator: Javohir Oromov
+ * project: Block Shuffle 15
+ * Javohir's MacBook Air
+ */
 class RestartDialog(context: Context): AlertDialog(context) {
     private val binding: DialogRestartBinding = DialogRestartBinding.inflate(LayoutInflater.from(context))
 

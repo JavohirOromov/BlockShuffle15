@@ -10,6 +10,8 @@ class LocalStorage private constructor(context: Context) {
         private lateinit var storage: LocalStorage
         private const val FILE_NAME = "Javohir's Puzzle"
         private const val SCORE = "score"
+        private const val NUMBERS = "numbers"
+        private const val TIME = "time"
         private const val RECORD1 = "record1"
         private const val RECORD2 = "record2"
         private const val RECORD3 = "record3"
@@ -24,7 +26,6 @@ class LocalStorage private constructor(context: Context) {
                 storage = LocalStorage(context)
             }
         }
-
         fun getInstance(): LocalStorage {
             return storage
         }
@@ -35,10 +36,21 @@ class LocalStorage private constructor(context: Context) {
         editor.apply()
     }
 
-    fun getCount(): Int {
+    fun getScore(): Int {
         return preferences.getInt(SCORE, 0)
     }
-
+    fun saveButton(numbers: String){
+        editor.putString(NUMBERS,numbers).apply()
+    }
+    fun getButton(): String? {
+        return preferences.getString(NUMBERS,"")
+    }
+    fun saveTime(time: Long){
+        editor.putLong(TIME,time).apply()
+    }
+    fun getTime(): Long{
+        return preferences.getLong(TIME,0)
+    }
     fun saveRecord1(record1: Int) {
         editor.putInt(RECORD1, record1)
         editor.apply()

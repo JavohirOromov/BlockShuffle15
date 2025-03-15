@@ -53,4 +53,8 @@ dependencies {
 
     // additional factories that use reflection under hood
     implementation(libs.vbpd.reflection)
+
+    // viewModel Javohir Oromov
+    implementation (libs.androidx.fragment.ktx)
+    implementation (libs.androidx.lifecycle.extensions)
 }

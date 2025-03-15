@@ -7,7 +7,11 @@ import com.example.blockshuffle15.R
 import com.example.blockshuffle15.databinding.FragmentRecordBinding
 import com.example.blockshuffle15.storage.LocalStorage
 import dev.androidbroadcast.vbpd.viewBinding
-
+/**
+ * Creator: Javohir Oromov
+ * project: Block Shuffle 15
+ * Javohir's MacBook Air
+ */
 class RecordFragment: Fragment(R.layout.fragment_record) {
     private val binding: FragmentRecordBinding by viewBinding(FragmentRecordBinding::bind)
     private val storage = LocalStorage.getInstance()

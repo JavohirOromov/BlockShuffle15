@@ -7,7 +7,11 @@ import androidx.fragment.app.Fragment
 import com.example.blockshuffle15.R
 import com.example.blockshuffle15.databinding.FragmentInfoBinding
 import dev.androidbroadcast.vbpd.viewBinding
-
+/**
+ * Creator: Javohir Oromov
+ * project: Block Shuffle 15
+ * Javohir's MacBook Air
+ */
 class InfoFragment: Fragment(R.layout.fragment_info) {
     private val binding:FragmentInfoBinding by viewBinding(FragmentInfoBinding::bind)
 

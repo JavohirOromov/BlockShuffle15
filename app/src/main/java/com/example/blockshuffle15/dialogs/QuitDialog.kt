@@ -6,7 +6,11 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import com.example.blockshuffle15.R
 import com.example.blockshuffle15.databinding.DialogQuitBinding
-
+/**
+ * Creator: Javohir Oromov
+ * project: Block Shuffle 15
+ * Javohir's MacBook Air
+ */
 class QuitDialog(context: Context): AlertDialog(context) {
 
     private val binding: DialogQuitBinding = DialogQuitBinding.inflate(LayoutInflater.from(context))
