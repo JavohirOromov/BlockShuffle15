@@ -34,4 +34,4 @@ https://drive.google.com/file/d/1h85ELiVvzPOV7JXG27U4Gnq6Jp3M_cxt/view?usp=shari
 1.Repozitoriyni klonlash:
 
 ```bash
-https://github.com/JavohirOromov/EducationApp.git
+https://github.com/JavohirOromov/BlockShuffle15.git
