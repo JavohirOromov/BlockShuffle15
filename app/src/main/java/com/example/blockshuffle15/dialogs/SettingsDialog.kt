@@ -2,6 +2,7 @@ package com.example.blockshuffle15.dialogs
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.text.BoringLayout
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import com.example.blockshuffle15.R
@@ -67,5 +68,10 @@ class SettingsDialog(context: Context): AlertDialog(context) {
     private fun currentMusicState(): Boolean {
         return binding.switchMusic.isChecked
     }
-
+    fun checkMusic(check: Boolean){
+        binding.switchMusic.isChecked = check
+    }
+    fun checkSound(check: Boolean){
+        binding.switchSound.isChecked = check
+    }
 }

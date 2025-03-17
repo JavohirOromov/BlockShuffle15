@@ -34,6 +34,8 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     private var emptyX = 0
     private var emptyY = 0
     private var score = 0
+    private var musicContinue = true
+    private var soundContinue = true
     private var chronometer: Chronometer? = null
     private var storage: LocalStorage? = null
     private val calendar = Calendar.getInstance()
@@ -86,13 +88,12 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     }
     private fun setShuffleDate() {
         list = ArrayList()
-        for (i in 1 until 16){
+        for (i in 0 until 16){
             list.add(i)
         }
-        list.add(0)
-//        do {
-//            list.shuffle()
-//        }while (isSolvable())
+        do {
+            list.shuffle()
+        }while (isSolvable())
         for (i in buttons.indices) {
             for (j in buttons[i].indices) {
                 if (list[i * 4 + j] == 0) {
@@ -138,6 +139,8 @@ class GameFragment : Fragment(R.layout.fragment_game) {
             settingsDialog?.show()
         }
         settingsDialog?.setPlayClickListener { musicCheck, soundCheck ->
+            musicContinue = musicCheck
+            soundContinue = soundCheck
             if (musicCheck){
                 music.start()
             }else{
@@ -313,11 +316,16 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         storage?.saveButton(stringBuilder.toString())
         storage?.saveScore(score)
         storage?.saveTime(elapsedTime)
+        storage?.saveMusicCheck(musicContinue)
+        storage?.saveSoundCheck(soundContinue)
     }
-
     override fun onResume() {
         super.onResume()
-        music.start()
+        if (storage?.getMusicCheck() == true){
+            music.start()
+        }else{
+            music.pause()
+        }
     }
     private fun setViewGetStorage(){
         val savedData = storage?.getButton()?.split("#")?.filter { it.isNotEmpty() } ?: listOf()
@@ -346,6 +354,24 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         binding.score.text = score.toString()
         binding.time.base = SystemClock.elapsedRealtime() - savedTime
         binding.time.start()
+        if (storage?.getMusicCheck() == true){
+            music.start()
+            settingsDialog?.checkMusic(true)
+            Log.d("TTT","if music ${storage?.getMusicCheck()}")
+        }else{
+            music.pause()
+            settingsDialog?.checkMusic(false)
+            Log.d("TTT","else music ${storage?.getMusicCheck()}")
+        }
+        if (storage?.getSoundCheck() == true){
+            sound.start()
+            settingsDialog?.checkSound(true)
+            Log.d("TTT","if sound ${storage?.getSoundCheck()}")
+        }else{
+            sound.pause()
+            settingsDialog?.checkSound(false)
+            Log.d("TTT","else music ${storage?.getSoundCheck()}")
+        }
     }
 }
 data class MyCoordinate(val x: Int, val y: Int)

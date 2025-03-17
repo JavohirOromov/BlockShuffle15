@@ -21,6 +21,8 @@ class LocalStorage private constructor(context: Context) {
         private const val DATE1 = "date1"
         private const val DATE2 = "date2"
         private const val DATE3 = "date3"
+        private const val MUSIC = "music"
+        private const val SOUND = "sound"
         fun init(context: Context) {
             if (!(::storage.isInitialized)) {
                 storage = LocalStorage(context)
@@ -115,5 +117,17 @@ class LocalStorage private constructor(context: Context) {
     }
     fun getDate3(): String?{
         return preferences.getString(DATE3,"00 - 00")
+    }
+    fun saveMusicCheck(checkMusic: Boolean){
+        editor.putBoolean(MUSIC,checkMusic).apply()
+    }
+    fun getMusicCheck(): Boolean{
+        return preferences.getBoolean(MUSIC,false)
+    }
+    fun saveSoundCheck(checkSound: Boolean){
+        editor.putBoolean(SOUND,checkSound).apply()
+    }
+    fun getSoundCheck(): Boolean{
+        return preferences.getBoolean(SOUND,false)
     }
 }
