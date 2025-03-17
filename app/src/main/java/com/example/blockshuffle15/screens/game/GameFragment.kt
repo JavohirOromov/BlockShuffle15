@@ -1,4 +1,5 @@
 package com.example.blockshuffle15.screens.game
+import SwallowDialog
 import android.annotation.SuppressLint
 import android.icu.util.Calendar
 import android.media.MediaPlayer
@@ -11,7 +12,6 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.example.blockshuffle15.R
 import com.example.blockshuffle15.databinding.FragmentGameBinding
 import com.example.blockshuffle15.dialogs.RestartDialog
@@ -24,6 +24,7 @@ import kotlin.math.abs
 /**
  * Creator: Javohir Oromov
  * project: Block shuffle 15
+ * Date: 15/03/25
  * Javohir's MacBook Air
  */
 class GameFragment : Fragment(R.layout.fragment_game) {
@@ -40,6 +41,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     private val currentDate = dateFormat.format(calendar.time)
     private var settingsDialog: SettingsDialog? = null
     private var restartDialog: RestartDialog? = null
+    private var swallowDialog: SwallowDialog? = null
     private var checkClick: Boolean = true
     private val music: MediaPlayer by lazy {
         MediaPlayer.create(requireContext(),R.raw.music1)
@@ -69,6 +71,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         storage = LocalStorage.getInstance()
         settingsDialog = SettingsDialog(requireContext())
         restartDialog = RestartDialog(requireContext())
+        swallowDialog = SwallowDialog(requireContext())
         binding.time.base = SystemClock.elapsedRealtime()
         binding.time.start()
         music.start()
@@ -83,12 +86,13 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     }
     private fun setShuffleDate() {
         list = ArrayList()
-        for (i in 0 until 16){
+        for (i in 1 until 16){
             list.add(i)
         }
-        do {
-            list.shuffle()
-        }while (!isSolvable())
+        list.add(0)
+//        do {
+//            list.shuffle()
+//        }while (isSolvable())
         for (i in buttons.indices) {
             for (j in buttons[i].indices) {
                 if (list[i * 4 + j] == 0) {
@@ -147,8 +151,11 @@ class GameFragment : Fragment(R.layout.fragment_game) {
                 checkClick = false
             }
         }
+        swallowDialog?.setYesClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+            swallowDialog?.dismiss()
+        }
     }
-
     private fun checkCanMove(x: Int, y: Int) {
         if ((abs(emptyX - x) == 1 && emptyY == y) || (abs(emptyY - y) == 1 && emptyX == x)) {
             buttons[emptyX][emptyY].apply {
@@ -176,7 +183,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
             emptyY = y
             if (x == 3 && y == 3) {
                 if (gameOver()) {
-                    Toast.makeText(requireContext(), "Yutingiz", Toast.LENGTH_SHORT).show()
+                    swallowDialog?.show()
                     saveRecord()
                 }
             }
@@ -229,7 +236,6 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         }
         return true
     }
-
     private fun isSolvable(): Boolean {
         val flatNumbers = mutableListOf<Int>()
         for (num in list) {

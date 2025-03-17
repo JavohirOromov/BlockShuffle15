@@ -7,8 +7,55 @@
     >
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonMenu"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/btn_menu"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/continueBtn"
+        app:layout_constraintHorizontal_bias="0.38"
+        app:layout_constraintVertical_bias="0.4"
+        android:text="1"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:paddingStart="8dp"
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonMenu1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/btn_menu"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/continueBtn"
+        app:layout_constraintHorizontal_bias="0.62"
+        app:layout_constraintVertical_bias="0.4"
+        android:text="5"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:paddingStart="6dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Puzzle"
+        android:textSize="36sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/font1"
+        app:layout_constraintTop_toBottomOf="@id/buttonMenu"
+        app:layout_constraintLeft_toLeftOf="@id/buttonMenu"
+        app:layout_constraintRight_toRightOf="@id/buttonMenu1"
+        android:layout_marginTop="6dp"
+        />
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/continueBtn"
-        android:layout_width="180dp"
+        android:layout_width="220dp"
         android:layout_height="60dp"
         android:background="@drawable/button_s"
         android:text="Continue"
@@ -20,13 +67,13 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintVertical_bias="0.32"
         android:textSize="16sp"
         />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/newGameBtn"
-        android:layout_width="180dp"
+        android:layout_width="220dp"
         android:layout_height="60dp"
         android:background="@drawable/button_s"
         android:text="New Game"
@@ -43,7 +90,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/InfoBtn"
-        android:layout_width="180dp"
+        android:layout_width="220dp"
         android:layout_height="60dp"
         android:background="@drawable/button_s"
         android:text="Info"
@@ -60,7 +107,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/recordBtn"
-        android:layout_width="180dp"
+        android:layout_width="220dp"
         android:layout_height="60dp"
         android:background="@drawable/button_s"
         android:text="Record"
@@ -77,7 +124,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/quitBtn"
-        android:layout_width="180dp"
+        android:layout_width="220dp"
         android:layout_height="60dp"
         android:background="@drawable/button_s"
         android:text="Quit"
