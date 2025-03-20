@@ -138,25 +138,27 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         binding.settings.setOnClickListener {
             settingsDialog?.show()
         }
-        settingsDialog?.setPlayClickListener { musicCheck, soundCheck ->
-            musicContinue = musicCheck
-            soundContinue = soundCheck
-            if (musicCheck){
+        swallowDialog?.setYesClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+            swallowDialog?.dismiss()
+        }
+        settingsDialog?.setMusicSwitchClickListener {
+            musicContinue = it
+            if (it){
                 music.start()
             }else{
                 music.pause()
             }
-            if (soundCheck){
-               sound.start()
+        }
+        settingsDialog?.setSoundSwitchClickListener {
+            soundContinue = it
+            if (it){
+                sound.start()
                 checkClick = true
             }else{
                 sound.pause()
                 checkClick = false
             }
-        }
-        swallowDialog?.setYesClickListener {
-            requireActivity().supportFragmentManager.popBackStack()
-            swallowDialog?.dismiss()
         }
     }
     private fun checkCanMove(x: Int, y: Int) {

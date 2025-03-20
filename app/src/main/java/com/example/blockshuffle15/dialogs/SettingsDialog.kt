@@ -14,12 +14,16 @@ import com.example.blockshuffle15.databinding.DialogSettingsBinding
  */
 class SettingsDialog(context: Context): AlertDialog(context) {
     private val binding: DialogSettingsBinding = DialogSettingsBinding.inflate(LayoutInflater.from(context))
-    private var playClickListener: ((Boolean,Boolean) -> Unit)? = null
     private var initialSoundState = false
     private var initialMusicState = false
+    private var musicSwitchClickListener: ((Boolean) -> Unit)? = null
+    private var soundSwitchClickListener: ((Boolean) -> Unit)? = null
 
-    fun setPlayClickListener(playClickListener: (Boolean,Boolean) -> Unit){
-        this.playClickListener = playClickListener
+    fun setMusicSwitchClickListener(musicSwitchClickListener: (Boolean) -> Unit){
+        this.musicSwitchClickListener = musicSwitchClickListener
+    }
+    fun setSoundSwitchClickListener(soundSwitchClickListener: (Boolean) -> Unit){
+        this.soundSwitchClickListener = soundSwitchClickListener
     }
     init {
         setView(binding.root)
@@ -29,6 +33,7 @@ class SettingsDialog(context: Context): AlertDialog(context) {
         initialMusicState = binding.switchMusic.isChecked
 
         binding.switchSound.setOnCheckedChangeListener { _, isChecked ->
+            soundSwitchClickListener?.invoke(isChecked)
             if (isChecked) {
                 binding.sound.setBackgroundResource(R.drawable.sound_on)
             } else {
@@ -36,25 +41,19 @@ class SettingsDialog(context: Context): AlertDialog(context) {
             }
         }
         binding.switchMusic.setOnCheckedChangeListener { _, isChecked ->
+            musicSwitchClickListener?.invoke(isChecked)
             if (isChecked){
                 binding.music.setBackgroundResource(R.drawable.music_on)
             }else{
                 binding.music.setBackgroundResource(R.drawable.music_of)
             }
         }
-        binding.play.setOnClickListener {
-            playClickListener?.invoke(binding.switchMusic.isChecked,binding.switchSound.isChecked)
-            dismiss()
-        }
         binding.cancel.setOnClickListener {
-            binding.switchSound.isChecked = initialSoundState
-            binding.switchMusic.isChecked = initialMusicState
             dismiss()
         }
     }
     override fun show() {
         super.show()
-
         initialSoundState = currentSoundState()
         initialMusicState = currentMusicState()
 
@@ -64,7 +63,6 @@ class SettingsDialog(context: Context): AlertDialog(context) {
     private fun currentSoundState(): Boolean {
         return binding.switchSound.isChecked
     }
-
     private fun currentMusicState(): Boolean {
         return binding.switchMusic.isChecked
     }
