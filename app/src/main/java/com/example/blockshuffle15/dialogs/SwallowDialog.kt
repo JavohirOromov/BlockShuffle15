@@ -17,17 +17,19 @@ class SwallowDialog(context: Context): AlertDialog(context) {
     private val binding: DialogSwallowBinding = DialogSwallowBinding.inflate(LayoutInflater.from(context))
 
     private var yesClickListener: (() -> Unit)? = null
-
+    private var noClickListener: (() -> Unit)? = null
     fun setYesClickListener(yesClickListener: () -> Unit){
         this.yesClickListener = yesClickListener
     }
-
+    fun setNoClickListener(noClickListener: () -> Unit){
+        this.noClickListener = noClickListener
+    }
     init {
         setView(binding.root)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         window?.attributes?.windowAnimations = R.style.CustomDialogAnim
         binding.no.setOnClickListener {
-            dismiss()
+            noClickListener?.invoke()
         }
         binding.yes.setOnClickListener {
             yesClickListener?.invoke()

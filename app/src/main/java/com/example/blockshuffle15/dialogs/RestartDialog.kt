@@ -19,16 +19,12 @@ class RestartDialog(context: Context): AlertDialog(context) {
     fun setYesClickListener(yesClickListener: () -> Unit){
         this.yesClickListener = yesClickListener
     }
-    fun setNoClickListener(noClickListener: () -> Unit){
-        this.noClickListener = noClickListener
-    }
-
     init {
         setView(binding.root)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         window?.attributes?.windowAnimations = R.style.CustomDialogAnim
         binding.no.setOnClickListener {
-            noClickListener?.invoke()
+            dismiss()
         }
         binding.yes.setOnClickListener {
             yesClickListener?.invoke()

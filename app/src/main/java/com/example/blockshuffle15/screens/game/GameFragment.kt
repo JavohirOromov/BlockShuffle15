@@ -132,9 +132,6 @@ class GameFragment : Fragment(R.layout.fragment_game) {
             setShuffleDate()
             restartDialog?.dismiss()
         }
-        restartDialog?.setNoClickListener {
-            requireActivity().supportFragmentManager.popBackStack()
-        }
         binding.menu.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
         }
@@ -142,6 +139,16 @@ class GameFragment : Fragment(R.layout.fragment_game) {
             settingsDialog?.show()
         }
         swallowDialog?.setYesClickListener {
+            binding.score.text = "0"
+            binding.swallow.setBackgroundResource(R.drawable.time1)
+            binding.time.base = SystemClock.elapsedRealtime()
+            binding.time.start()
+            score = 0
+            setShuffleDate()
+            restartDialog?.dismiss()
+            swallowDialog?.dismiss()
+        }
+        swallowDialog?.setNoClickListener {
             requireActivity().supportFragmentManager.popBackStack()
             swallowDialog?.dismiss()
         }
