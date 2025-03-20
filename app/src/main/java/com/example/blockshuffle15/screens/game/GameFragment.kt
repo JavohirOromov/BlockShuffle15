@@ -132,6 +132,9 @@ class GameFragment : Fragment(R.layout.fragment_game) {
             setShuffleDate()
             restartDialog?.dismiss()
         }
+        restartDialog?.setNoClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
         binding.menu.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
         }
