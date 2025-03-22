@@ -1,4 +1,5 @@
 package com.example.blockshuffle15.screens.game
+import Media
 import SwallowDialog
 import android.annotation.SuppressLint
 import android.icu.util.Calendar
@@ -45,9 +46,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     private var restartDialog: RestartDialog? = null
     private var swallowDialog: SwallowDialog? = null
     private var checkClick: Boolean = true
-    private val music: MediaPlayer by lazy {
-        MediaPlayer.create(requireContext(),R.raw.music1)
-    }
+    private var music: Media? = null
     private val sound: MediaPlayer by lazy {
         MediaPlayer.create(requireContext(),R.raw.click1)
     }
@@ -71,12 +70,13 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         binding.swallow.setBackgroundResource(R.drawable.time1)
         chronometer = Chronometer(requireContext())
         storage = LocalStorage.getInstance()
+        music = Media.getInstance()
         settingsDialog = SettingsDialog(requireContext())
         restartDialog = RestartDialog(requireContext())
         swallowDialog = SwallowDialog(requireContext())
         binding.time.base = SystemClock.elapsedRealtime()
         binding.time.start()
-        music.start()
+        music?.play()
         buttons = Array(4) { Array(4) { AppCompatButton(requireContext()) } }
         val layout = binding.container
         for (i in 0 until layout.childCount) {
@@ -124,12 +124,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
             restartDialog?.show()
         }
         restartDialog?.setYesClickListener {
-            binding.score.text = "0"
-            binding.swallow.setBackgroundResource(R.drawable.time1)
-            binding.time.base = SystemClock.elapsedRealtime()
-            binding.time.start()
-            score = 0
-            setShuffleDate()
+           restartGame()
             restartDialog?.dismiss()
         }
         binding.menu.setOnClickListener {
@@ -139,25 +134,20 @@ class GameFragment : Fragment(R.layout.fragment_game) {
             settingsDialog?.show()
         }
         swallowDialog?.setYesClickListener {
-            binding.score.text = "0"
-            binding.swallow.setBackgroundResource(R.drawable.time1)
-            binding.time.base = SystemClock.elapsedRealtime()
-            binding.time.start()
-            score = 0
-            setShuffleDate()
-            restartDialog?.dismiss()
+           restartGame()
             swallowDialog?.dismiss()
         }
         swallowDialog?.setNoClickListener {
             requireActivity().supportFragmentManager.popBackStack()
+            restartGame()
             swallowDialog?.dismiss()
         }
         settingsDialog?.setMusicSwitchClickListener {
             musicContinue = it
             if (it){
-                music.start()
+                music?.play()
             }else{
-                music.pause()
+                music?.pause()
             }
         }
         settingsDialog?.setSoundSwitchClickListener {
@@ -170,6 +160,14 @@ class GameFragment : Fragment(R.layout.fragment_game) {
                 checkClick = false
             }
         }
+    }
+    private fun restartGame(){
+        binding.score.text = "0"
+        binding.swallow.setBackgroundResource(R.drawable.time1)
+        binding.time.base = SystemClock.elapsedRealtime()
+        binding.time.start()
+        score = 0
+        setShuffleDate()
     }
     private fun checkCanMove(x: Int, y: Int) {
         if ((abs(emptyX - x) == 1 && emptyY == y) || (abs(emptyY - y) == 1 && emptyX == x)) {
@@ -317,7 +315,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
 
     override fun onPause() {
         super.onPause()
-        music.pause()
+        music?.pause()
         val stringBuilder = StringBuilder()
         val elapsedTime = SystemClock.elapsedRealtime() - binding.time.base
         for (i in buttons.indices){
@@ -334,9 +332,9 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     override fun onResume() {
         super.onResume()
         if (storage?.getMusicCheck() == true){
-            music.start()
+            music?.play()
         }else{
-            music.pause()
+            music?.pause()
         }
     }
     private fun setViewGetStorage(){
@@ -367,11 +365,11 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         binding.time.base = SystemClock.elapsedRealtime() - savedTime
         binding.time.start()
         if (storage?.getMusicCheck() == true){
-            music.start()
+            music?.play()
             settingsDialog?.checkMusic(true)
             Log.d("TTT","if music ${storage?.getMusicCheck()}")
         }else{
-            music.pause()
+            music?.pause()
             settingsDialog?.checkMusic(false)
             Log.d("TTT","else music ${storage?.getMusicCheck()}")
         }

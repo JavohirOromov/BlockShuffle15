@@ -1,4 +1,5 @@
 package com.example.blockshuffle15.screens
+import Media
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
@@ -7,6 +8,7 @@ import com.example.blockshuffle15.R
 import com.example.blockshuffle15.databinding.FragmentMenuBinding
 import com.example.blockshuffle15.dialogs.QuitDialog
 import com.example.blockshuffle15.screens.game.GameFragment
+import com.example.blockshuffle15.storage.LocalStorage
 import com.example.blockshuffle15.utils.replaceFragment
 import dev.androidbroadcast.vbpd.viewBinding
 /**
@@ -17,13 +19,17 @@ import dev.androidbroadcast.vbpd.viewBinding
 class MenuFragment: Fragment(R.layout.fragment_menu) {
     private val binding: FragmentMenuBinding by viewBinding(FragmentMenuBinding::bind)
     private var quitDialog: QuitDialog? = null
-    private val music: MediaPlayer by lazy {
-        MediaPlayer.create(requireContext(),R.raw.music1)
-    }
+    private var storage: LocalStorage? = null
+    private var music: Media? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         quitDialog = QuitDialog(requireContext())
-        music.start()
+        storage = LocalStorage.getInstance()
+        music = Media.getInstance()
+        addClickEvents()
+        checkMusic()
+    }
+    private fun addClickEvents(){
         binding.newGameBtn.setOnClickListener {
             val bundle = Bundle().apply {
                 putInt("newGame",1)
@@ -56,13 +62,23 @@ class MenuFragment: Fragment(R.layout.fragment_menu) {
             quitDialog?.dismiss()
         }
     }
-
+    private fun checkMusic(){
+        if (storage?.getMusicCheck() == true){
+            music?.play()
+        }else{
+            music?.pause()
+        }
+    }
     override fun onResume() {
         super.onResume()
-        music.start()
+        if (storage?.getMusicCheck() == true){
+            music?.play()
+        }else{
+            music?.pause()
+        }
     }
     override fun onPause() {
         super.onPause()
-        music.pause()
+        music?.pause()
     }
 }

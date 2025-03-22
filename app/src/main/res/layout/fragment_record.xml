@@ -15,17 +15,39 @@
         android:textColor="@color/white"
         app:layout_constraintLeft_toLeftOf="@id/liner"
         app:layout_constraintRight_toRightOf="@id/liner"
-        app:layout_constraintBottom_toTopOf="@id/liner"
-        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@id/image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3"
+        android:layout_marginTop="30dp"
+        />
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/back"
+        app:tint="@color/white"
+        app:layout_constraintTop_toTopOf="@id/text"
+        app:layout_constraintBottom_toBottomOf="@id/text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="16dp"
         />
 
 
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:src="@drawable/info_img"
+        app:layout_constraintTop_toBottomOf="@id/text"
+        android:layout_marginTop="24dp"
+        />
     <LinearLayout
         android:id="@+id/liner"
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -246,23 +268,5 @@
                 />
         </LinearLayout>
 
-
     </LinearLayout>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/back"
-        android:layout_width="180dp"
-        android:layout_height="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/liner"
-        android:background="@drawable/score_button"
-        android:text="Back"
-        android:textAllCaps="false"
-        android:textSize="24sp"
-        android:paddingBottom="5dp"
-        android:textColor="@color/white"
-        android:fontFamily="@font/font1"
-        />
 </androidx.constraintlayout.widget.ConstraintLayout>

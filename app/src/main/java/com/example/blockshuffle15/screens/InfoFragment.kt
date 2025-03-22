@@ -1,4 +1,5 @@
 package com.example.blockshuffle15.screens
+import Media
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -6,6 +7,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.blockshuffle15.R
 import com.example.blockshuffle15.databinding.FragmentInfoBinding
+import com.example.blockshuffle15.storage.LocalStorage
 import dev.androidbroadcast.vbpd.viewBinding
 /**
  * Creator: Javohir Oromov
@@ -14,10 +16,17 @@ import dev.androidbroadcast.vbpd.viewBinding
  */
 class InfoFragment: Fragment(R.layout.fragment_info) {
     private val binding:FragmentInfoBinding by viewBinding(FragmentInfoBinding::bind)
-
+    private var storage: LocalStorage? = null
+    private var music: Media? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        storage = LocalStorage.getInstance()
+        music = Media.getInstance()
+        addClickEvents()
+        checkMusic()
+    }
 
+    private fun addClickEvents(){
         binding.back.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
         }
@@ -37,7 +46,26 @@ class InfoFragment: Fragment(R.layout.fragment_info) {
         }
         binding.telegramText.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/Javohir_Oromov"))
-             startActivity(intent)
+            startActivity(intent)
         }
+    }
+    private fun checkMusic(){
+        if (storage?.getMusicCheck() == true){
+            music?.play()
+        }else{
+            music?.pause()
+        }
+    }
+    override fun onResume() {
+        super.onResume()
+        if (storage?.getMusicCheck() == true){
+            music?.play()
+        }else{
+            music?.pause()
+        }
+    }
+    override fun onPause() {
+        super.onPause()
+        music?.pause()
     }
 }
