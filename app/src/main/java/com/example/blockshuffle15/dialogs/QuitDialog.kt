@@ -14,7 +14,6 @@ import com.example.blockshuffle15.databinding.DialogQuitBinding
 class QuitDialog(context: Context): AlertDialog(context) {
 
     private val binding: DialogQuitBinding = DialogQuitBinding.inflate(LayoutInflater.from(context))
-
     private var yesClickListener: (() -> Unit)? = null
 
     fun setYesClickListener(yesClickListener: () -> Unit){

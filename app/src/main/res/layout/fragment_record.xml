@@ -5,6 +5,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#8D3226">
 
+
+
+
+
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
@@ -42,11 +46,11 @@
         app:layout_constraintTop_toBottomOf="@id/text"
         android:layout_marginTop="24dp"
         />
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/liner"
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -54,219 +58,319 @@
         app:layout_constraintVertical_bias="0.4"
         android:background="@drawable/orqa_img"
         android:layout_marginHorizontal="12dp"
-        android:gravity="center|top"
         >
-        <LinearLayout
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.25"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.06"
+            />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.47"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.7"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline6"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginHorizontal="36dp"
-            android:layout_marginTop="36dp"
+            app:layout_constraintGuide_percent="0.1"
+            />
 
-            >
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Rank"
-                android:textSize="24sp"
-                android:textColor="#24A935"
-                android:textStyle="bold"
-                android:gravity="center"
-                />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Score"
-                android:textSize="24sp"
-                android:textColor="#24A935"
-                android:textStyle="bold"
-                android:gravity="center"
-                />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Time"
-                android:textSize="24sp"
-                android:textColor="#24A935"
-                android:textStyle="bold"
-                android:gravity="center"
-                />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Date"
-                android:textSize="24sp"
-                android:textColor="#24A935"
-                android:textStyle="bold"
-                android:gravity="center"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginRight="18dp"
-            android:layout_marginTop="36dp"
-            >
+            app:layout_constraintGuide_percent="0.3"
+            />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="1."
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:gravity="end"
-                />
-
-            <TextView
-                android:id="@+id/score1"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="15"
-                android:textSize="24sp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:gravity="center"
-                />
-
-            <TextView
-                android:id="@+id/time1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="00:40"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-            <TextView
-                android:id="@+id/date1"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="00 - 00"
-                android:textSize="18sp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:gravity="center"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline8"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-           android:layout_marginRight="18dp"
-            android:layout_marginTop="36dp"
-            >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="2."
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:gravity="end"
-                />
-
-            <TextView
-                android:id="@+id/score2"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="23"
-                android:textSize="24sp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:gravity="center"
-                />
-            <TextView
-                android:id="@+id/time2"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="00:50"
-                android:textSize="18sp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:gravity="center"
-                />
-            <TextView
-                android:id="@+id/date2"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="00 - 00"
-                android:textSize="18sp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:gravity="center"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+            app:layout_constraintGuide_percent="0.5"
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline9"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginRight="18dp"
-            android:layout_marginTop="36dp"
-            >
+            app:layout_constraintGuide_percent="0.7"
+            />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="3."
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:gravity="end"
-                />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.9"
+            />
 
-            <TextView
-                android:id="@+id/score3"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="32"
-                android:textSize="24sp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:gravity="center"
-                />
-            <TextView
-                android:id="@+id/time3"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="00:58"
-                android:textSize="18sp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:gravity="center"
-                />
-            <TextView
-                android:id="@+id/date3"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="00 - 00"
-                android:textSize="18sp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:gravity="center"
-                />
-        </LinearLayout>
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Rank"
+            android:textSize="24sp"
+            android:textColor="#24A935"
+            android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/guideline6"
+            app:layout_constraintLeft_toRightOf="@id/guideline2"
+            app:layout_constraintBottom_toTopOf="@id/guideline7"
+            app:layout_constraintRight_toLeftOf="@id/guideline1"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Score"
+            android:textSize="24sp"
+            android:textColor="#24A935"
+            android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintLeft_toRightOf="@id/guideline1"
+            app:layout_constraintTop_toBottomOf="@id/guideline6"
+            app:layout_constraintBottom_toTopOf="@id/guideline7"
+            app:layout_constraintRight_toLeftOf="@id/guideline3"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Time"
+            android:textSize="24sp"
+            android:textColor="#24A935"
+            android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintLeft_toRightOf="@id/guideline3"
+            app:layout_constraintTop_toBottomOf="@id/guideline6"
+            app:layout_constraintBottom_toTopOf="@id/guideline7"
+            app:layout_constraintRight_toLeftOf="@id/guideline4"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textSize="24sp"
+            android:textColor="#24A935"
+            android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintLeft_toRightOf="@id/guideline4"
+            app:layout_constraintTop_toBottomOf="@id/guideline6"
+            app:layout_constraintBottom_toTopOf="@id/guideline7"
+            app:layout_constraintRight_toLeftOf="@id/guideline5"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1."
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/guideline7"
+            app:layout_constraintBottom_toTopOf="@id/guideline8"
+            app:layout_constraintLeft_toRightOf="@id/guideline2"
+            app:layout_constraintRight_toLeftOf="@id/guideline1"
+            />
+
+        <TextView
+            android:id="@+id/score1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="15"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/guideline7"
+            app:layout_constraintBottom_toTopOf="@id/guideline8"
+            app:layout_constraintLeft_toRightOf="@id/guideline1"
+            app:layout_constraintRight_toLeftOf="@id/guideline3"
+            />
+
+        <TextView
+            android:id="@+id/time1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:40"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/guideline7"
+            app:layout_constraintBottom_toTopOf="@id/guideline8"
+            app:layout_constraintLeft_toRightOf="@id/guideline3"
+            app:layout_constraintRight_toLeftOf="@id/guideline4"
+            />
+
+        <TextView
+            android:id="@+id/date1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00 - 00"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/guideline7"
+            app:layout_constraintBottom_toTopOf="@id/guideline8"
+            app:layout_constraintLeft_toRightOf="@id/guideline4"
+            app:layout_constraintRight_toLeftOf="@id/guideline5"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2."
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/guideline8"
+            app:layout_constraintBottom_toTopOf="@id/guideline9"
+            app:layout_constraintLeft_toRightOf="@id/guideline2"
+            app:layout_constraintRight_toLeftOf="@id/guideline1"
+            />
+
+        <TextView
+            android:id="@+id/score2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="23"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/guideline8"
+            app:layout_constraintBottom_toTopOf="@id/guideline9"
+            app:layout_constraintLeft_toRightOf="@id/guideline1"
+            app:layout_constraintRight_toLeftOf="@id/guideline3"
+            />
+
+        <TextView
+            android:id="@+id/time2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:50"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/guideline8"
+            app:layout_constraintBottom_toTopOf="@id/guideline9"
+            app:layout_constraintLeft_toRightOf="@id/guideline3"
+            app:layout_constraintRight_toLeftOf="@id/guideline4"
+            />
+
+        <TextView
+            android:id="@+id/date2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="00 - 00"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/guideline8"
+            app:layout_constraintBottom_toTopOf="@id/guideline9"
+            app:layout_constraintLeft_toRightOf="@id/guideline4"
+            app:layout_constraintRight_toLeftOf="@id/guideline5"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3."
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="end"
+            app:layout_constraintTop_toBottomOf="@id/guideline9"
+            app:layout_constraintBottom_toTopOf="@id/guideline10"
+            app:layout_constraintLeft_toRightOf="@id/guideline2"
+            app:layout_constraintRight_toLeftOf="@id/guideline1"
+            />
+
+        <TextView
+            android:id="@+id/score3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="32"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/guideline9"
+            app:layout_constraintBottom_toTopOf="@id/guideline10"
+            app:layout_constraintLeft_toRightOf="@id/guideline1"
+            app:layout_constraintRight_toLeftOf="@id/guideline3"
+            />
+
+        <TextView
+            android:id="@+id/time3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:58"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/guideline9"
+            app:layout_constraintBottom_toTopOf="@id/guideline10"
+            app:layout_constraintLeft_toRightOf="@id/guideline3"
+            app:layout_constraintRight_toLeftOf="@id/guideline4"
+            />
+
+        <TextView
+            android:id="@+id/date3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="00 - 00"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/guideline9"
+            app:layout_constraintBottom_toTopOf="@id/guideline10"
+            app:layout_constraintLeft_toRightOf="@id/guideline4"
+            app:layout_constraintRight_toLeftOf="@id/guideline5"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

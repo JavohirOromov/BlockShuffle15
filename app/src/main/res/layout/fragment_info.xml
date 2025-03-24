@@ -42,6 +42,7 @@
         android:background="?attr/selectableItemBackground"
         />
 
+
     <TextView
         android:id="@+id/fon"
         android:layout_width="wrap_content"
@@ -49,7 +50,7 @@
         android:background="@drawable/orqa_img"
         android:fontFamily="@font/font1"
         android:gravity="center"
-        android:paddingHorizontal="24dp"
+        android:paddingHorizontal="36dp"
         android:text="Assalomu alaykum men Javohir Oromov Bu Block shuffle dasturimni Gita mobil dasturchilar akademiyasining Bootcamp 10 guruhida uyga berilgan vazifalar asosida yaratdim Created by Javohir Oromov on 14/03"
         android:textColor="@color/white"
         android:textSize="24sp"
@@ -58,7 +59,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/img"
-        app:layout_constraintVertical_bias="0.098" />
+        app:layout_constraintVertical_bias="0.098"
+        android:justificationMode="inter_word"
+        />
 
     <ImageView
         android:id="@+id/telegram"
