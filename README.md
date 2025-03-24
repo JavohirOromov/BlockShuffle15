@@ -21,7 +21,7 @@ Mening Bluck Shuffle 15 dasturim
 <p float="left">
   <img src="https://drive.google.com/uc?export=view&id=1CJ_k7BwSI-8WMewxfD3eM270nLY3ru0O" width="10%" />
   <img src="https://drive.google.com/uc?export=view&id=1HheCwFXWQ3Fh0NOudv6XxC_1HJJFtUDT" width="10%" />
-  <img src="https://drive.google.com/uc?export=view&id=1a8pxJ1TdUBfNom9xvBQJqpHGbgCYF9AD" width="10%" />
+  <img src="https://drive.google.com/uc?export=view&id=1HheCwFXWQ3Fh0NOudv6XxC_1HJJFtUDT" width="10%" />
   <img src="https://drive.google.com/uc?export=view&id=1HheCwFXWQ3Fh0NOudv6XxC_1HJJFtUDT" width="10%" />
    <img src="https://drive.google.com/uc?export=view&id=1YWKREIqMwfJ3KYN43RwdV4OcJqmshPU8" width="10%" />
   <img src="https://drive.google.com/uc?export=view&id=1TwcEUXMHUmadhATKFfAYP081wjPp6r2f" width="10%" />
