@@ -28,6 +28,9 @@ class Media private constructor(){
     fun pause(){
         media?.pause()
     }
+    fun playing(): Boolean{
+        return media?.isPlaying ?: false
+    }
     fun stop(){
         media?.stop()
         media?.release()

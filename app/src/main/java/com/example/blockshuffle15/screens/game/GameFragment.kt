@@ -46,10 +46,10 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     private var restartDialog: RestartDialog? = null
     private var swallowDialog: SwallowDialog? = null
     private var checkClick: Boolean = true
-    private var music: Media? = null
     private val sound: MediaPlayer by lazy {
         MediaPlayer.create(requireContext(),R.raw.click1)
     }
+    private var music: Media? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val isContinue = arguments?.getInt("continue",-1)?: -1
@@ -63,6 +63,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
             loadViews()
             setShuffleDate()
             clickEvent()
+            music?.play()
         }
     }
     private fun loadViews() {
@@ -76,7 +77,6 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         swallowDialog = SwallowDialog(requireContext())
         binding.time.base = SystemClock.elapsedRealtime()
         binding.time.start()
-        music?.play()
         buttons = Array(4) { Array(4) { AppCompatButton(requireContext()) } }
         val layout = binding.container
         for (i in 0 until layout.childCount) {
@@ -342,7 +342,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         val savedTime = storage?.getTime()?: 0L
         if (savedData.size == 16) {
             list.clear()
-            list.addAll(savedData.map { it.toInt() }) // To'g'ri list qayta tiklanadi
+            list.addAll(savedData.map { it.toInt() })
                     for (i in buttons.indices) {
                         for (j in buttons[i].indices) {
                             if (list[i * 4 + j] == 0) {
@@ -365,22 +365,20 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         binding.time.base = SystemClock.elapsedRealtime() - savedTime
         binding.time.start()
         if (storage?.getMusicCheck() == true){
-            music?.play()
+           music?.play()
             settingsDialog?.checkMusic(true)
-            Log.d("TTT","if music ${storage?.getMusicCheck()}")
         }else{
             music?.pause()
             settingsDialog?.checkMusic(false)
-            Log.d("TTT","else music ${storage?.getMusicCheck()}")
         }
         if (storage?.getSoundCheck() == true){
-            sound.start()
+            if (sound.isPlaying){
+                sound.start()
+            }
             settingsDialog?.checkSound(true)
-            Log.d("TTT","if sound ${storage?.getSoundCheck()}")
         }else{
             sound.pause()
             settingsDialog?.checkSound(false)
-            Log.d("TTT","else music ${storage?.getSoundCheck()}")
         }
     }
 }
