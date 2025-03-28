@@ -21,6 +21,7 @@ class RestartDialog(context: Context): AlertDialog(context) {
     }
     init {
         setView(binding.root)
+        setCancelable(false)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         window?.attributes?.windowAnimations = R.style.CustomDialogAnim
         binding.no.setOnClickListener {
