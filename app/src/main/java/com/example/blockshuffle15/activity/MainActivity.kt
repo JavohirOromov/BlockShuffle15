@@ -49,4 +49,28 @@ class MainActivity : AppCompatActivity() {
         }
         storage?.saveMusicCheck(isOn)
     }
+
+    override fun onResume() {
+        super.onResume()
+        if (storage?.getMusicCheck() == true) {
+            music?.start()
+            music?.isLooping = true
+            settingsDialog?.checkMusic(true)
+            Log.d("TTT","if ${storage?.getMusicCheck()}")
+        } else {
+            music?.pause()
+            settingsDialog?.checkMusic(false)
+            Log.d("TTT","else ${storage?.getMusicCheck()}")
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        music?.pause()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        music?.pause()
+    }
 }
