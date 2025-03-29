@@ -1,5 +1,4 @@
 package com.example.blockshuffle15.app
-import Media
 import android.app.Application
 import com.example.blockshuffle15.R
 import com.example.blockshuffle15.storage.LocalStorage
@@ -12,6 +11,5 @@ class App: Application() {
     override fun onCreate() {
         super.onCreate()
         LocalStorage.init(this)
-        Media.init(this, R.raw.music1)
     }
 }

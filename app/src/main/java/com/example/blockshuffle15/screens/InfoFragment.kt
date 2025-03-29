@@ -1,5 +1,4 @@
 package com.example.blockshuffle15.screens
-import Media
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -17,13 +16,10 @@ import dev.androidbroadcast.vbpd.viewBinding
 class InfoFragment: Fragment(R.layout.fragment_info) {
     private val binding:FragmentInfoBinding by viewBinding(FragmentInfoBinding::bind)
     private var storage: LocalStorage? = null
-    private var music: Media? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         storage = LocalStorage.getInstance()
-        music = Media.getInstance()
         addClickEvents()
-        checkMusic()
     }
 
     private fun addClickEvents(){
@@ -48,24 +44,5 @@ class InfoFragment: Fragment(R.layout.fragment_info) {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/Javohir_Oromov"))
             startActivity(intent)
         }
-    }
-    private fun checkMusic(){
-        if (storage?.getMusicCheck() == true){
-            music?.play()
-        }else{
-            music?.pause()
-        }
-    }
-    override fun onResume() {
-        super.onResume()
-        if (storage?.getMusicCheck() == true){
-            music?.play()
-        }else{
-            music?.pause()
-        }
-    }
-    override fun onPause() {
-        super.onPause()
-        music?.pause()
     }
 }

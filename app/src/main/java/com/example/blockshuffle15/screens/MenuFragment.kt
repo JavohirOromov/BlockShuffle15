@@ -1,5 +1,4 @@
 package com.example.blockshuffle15.screens
-import Media
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
@@ -20,14 +19,11 @@ class MenuFragment: Fragment(R.layout.fragment_menu) {
     private val binding: FragmentMenuBinding by viewBinding(FragmentMenuBinding::bind)
     private var quitDialog: QuitDialog? = null
     private var storage: LocalStorage? = null
-    private var music: Media? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         quitDialog = QuitDialog(requireContext())
         storage = LocalStorage.getInstance()
-        music = Media.getInstance()
         addClickEvents()
-        checkMusic()
     }
     private fun addClickEvents(){
         binding.newGameBtn.setOnClickListener {
@@ -61,24 +57,5 @@ class MenuFragment: Fragment(R.layout.fragment_menu) {
             requireActivity().finish()
             quitDialog?.dismiss()
         }
-    }
-    private fun checkMusic(){
-        if (storage?.getMusicCheck() == true){
-            music?.play()
-        }else{
-            music?.pause()
-        }
-    }
-    override fun onResume() {
-        super.onResume()
-        if (storage?.getMusicCheck() == true){
-            music?.play()
-        }else{
-            music?.pause()
-        }
-    }
-    override fun onPause() {
-        super.onPause()
-        music?.pause()
     }
 }

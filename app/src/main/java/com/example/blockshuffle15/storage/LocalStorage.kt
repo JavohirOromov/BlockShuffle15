@@ -142,7 +142,7 @@ class LocalStorage private constructor(context: Context) {
         }
 
         fun getMusicCheck(): Boolean {
-            return preferences.getBoolean(MUSIC, false)
+            return preferences.getBoolean(MUSIC, true)
         }
 
         fun saveSoundCheck(checkSound: Boolean) {
