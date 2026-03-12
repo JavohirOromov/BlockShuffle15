@@ -23,8 +23,11 @@ Mening Bluck Shuffle 15 dasturim
   <img src="https://drive.google.com/uc?export=view&id=1pk0NMdE012GSzODf_4XRyH0g7p9RsF89" width="10%" />
   <img src="https://drive.google.com/uc?export=view&id=1K5wONkzLjWnhzH8cTWzac-_zL5Tk-KNf" width="10%" />
   <img src="https://drive.google.com/uc?export=view&id=1___D-y7tpoY6i-UdXiV4S5QhFXVZKbM4" width="10%" />
-
+  <img src="https://drive.google.com/uc?export=view&id=1rNIlCP8R5dyUIgtPAg_Rph4yYOPlvT_P" width="10%" />
+   <img src="https://drive.google.com/uc?export=view&id=1IoKfPzQ9w0upuXFecJG2kN9yHasx8kgi" width="10%" />
 </p>
+</p>
+
 
 ## ⚙️ O'rnatish va ishga tushirish
 
